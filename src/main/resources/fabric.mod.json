@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "disableaccessibilityscreen",
+  "version": "${version}",
+  "name": "DisableAccessibilityScreen",
+  "description": "Removes the Accessibility Screen on first launch, introduced with 23w03a",
+  "authors": [
+    "DaFuqs"
+  ],
+  "contact": {
+    "website": "https://github.com/DaFuqs/DisableAccessibilityScreen",
+    "repo": "https://github.com/DaFuqs/DisableAccessibilityScreen"
+  },
+  "license": "MIT",
+  "icon": "assets/disableaccessibilityscreen/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "de.dafuqs.disableaccessibilityscreen.client.DisableAccessibilityScreenClient"
+    ]
+  },
+  "mixins": [
+    "disableaccessibilityscreen.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.13",
+    "minecraft": "*"
+  }
+}
