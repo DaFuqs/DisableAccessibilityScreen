@@ -14,16 +14,12 @@
   "license": "MIT",
   "icon": "assets/disableaccessibilityscreen/icon.png",
   "environment": "client",
-  "entrypoints": {
-    "client": [
-      "de.dafuqs.disableaccessibilityscreen.client.DisableAccessibilityScreenClient"
-    ]
-  },
+  "entrypoints": { },
   "mixins": [
     "disableaccessibilityscreen.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.13",
-    "minecraft": "*"
+    "minecraft": "*",
+    "fabricloader": "*"
   }
 }

@@ -1,32 +1,21 @@
 package de.dafuqs.disableaccessibilityscreen.mixin;
 
-import de.dafuqs.disableaccessibilityscreen.client.*;
 import net.minecraft.client.*;
-import net.minecraft.client.gui.screen.*;
 import net.minecraft.client.option.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.client.realms.*;
+import net.minecraft.resource.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
 
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin {
-
-    @Shadow public abstract void setScreen(@Nullable Screen screen);
-
-    @Inject(method = "setScreen(Lnet/minecraft/client/gui/screen/Screen;)V", at = @At("HEAD"), cancellable = true)
-    private void disableAccessibilityScreen(@Nullable Screen screen, CallbackInfo ci) {
-        if(screen instanceof AccessibilityOnboardingScreen) {
-            // disable the narrator
-            DisableAccessibilityScreenClient.narratorDisableFlag = true;
-            MinecraftClient.getInstance().options.getNarrator().setValue(NarratorMode.OFF);
-            DisableAccessibilityScreenClient.narratorDisableFlag = false;
-
-            // load title screen instead
-            this.setScreen(new TitleScreen(true));
-            ci.cancel();
-        }
-
+    
+    @Shadow @Final public GameOptions options;
+    
+    @Inject(method = "onInitFinished(Lnet/minecraft/client/realms/RealmsClient;Lnet/minecraft/resource/ResourceReload;Lnet/minecraft/client/RunArgs$QuickPlay;)V", at = @At("HEAD"))
+    private void disableAccessibilityScreen(RealmsClient realms, ResourceReload reload, RunArgs.QuickPlay quickPlay, CallbackInfo ci) {
+        this.options.onboardAccessibility = false;
     }
 
 }
