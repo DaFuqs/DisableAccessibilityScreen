@@ -19,7 +19,7 @@
     "disableaccessibilityscreen.mixins.json"
   ],
   "depends": {
-    "minecraft": ">=1.21",
+    "minecraft": ">=${minecraft_version}",
     "fabricloader": "*"
   }
 }
