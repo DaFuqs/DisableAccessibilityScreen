@@ -1,18 +1,17 @@
 package de.dafuqs.disableaccessibilityscreen.mixin;
 
 import net.minecraft.client.*;
-import net.minecraft.client.option.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
 
-@Mixin(MinecraftClient.class)
+@Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin {
     
-    @Shadow @Final public GameOptions options;
+    @Shadow @Final public Options options;
     
-    @Inject(method = "onInitFinished(Lnet/minecraft/client/MinecraftClient$LoadingContext;)Ljava/lang/Runnable;", at = @At("HEAD"))
-    private void disableAccessibilityScreen(CallbackInfoReturnable<Runnable> cir) {
+    @Inject(method = "onResourceLoadFinished(Lnet/minecraft/client/GameLoadCookie;)V", at = @At("HEAD"))
+    private void disableAccessibilityScreen(GameLoadCookie loadCookie, CallbackInfo ci) {
         this.options.onboardAccessibility = false;
     }
 
